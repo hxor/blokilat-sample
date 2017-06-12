@@ -27,23 +27,23 @@ class HomeController extends Controller
     public function index()
     {
         $posts = Post::orderBy('date', 'desc')->paginate(3);
-        return $posts;
+        return view('pages.blog', compact('posts'));
     }
 
     /**
      * Get Post by Category
      */
     public function getPostByCategory($idcategory){
-        $post_category = Category::findOrFail($idcategory)->posts()->orderBy('date', 'desc')->paginate(3);
-        return $post_category;
+        $posts = Category::findOrFail($idcategory)->posts()->orderBy('date', 'desc')->paginate(3);
+        return view('pages.blog', compact('posts'));
     }
 
     /**
      * Get Post by User
      */
      public function getPostByUser($iduser){
-        $post_user = User::findOrFail($iduser)->posts()->orderBy('date', 'desc')->paginate(3);
-        return $post_user;
+        $posts = User::findOrFail($iduser)->posts()->orderBy('date', 'desc')->paginate(3);
+        return view('pages.blog', compact('posts'));
      }
 
      /**
@@ -51,6 +51,6 @@ class HomeController extends Controller
       */
      public function getPost($id){
         $post = Post::findOrFail($id);
-        return $post;
+        return view('pages.post', compact('post'));
      }
 }
