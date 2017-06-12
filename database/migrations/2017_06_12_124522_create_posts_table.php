@@ -19,9 +19,10 @@ class CreatePostsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('category_id')->unsigned();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->date('date');
             $table->string('title');
             $table->text('body');
-            $table->enum('status', ['1', '0']);
+            $table->enum('status', ['0', '1']);
             $table->text('image');
             $table->timestamps();
         });
