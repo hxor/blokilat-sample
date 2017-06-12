@@ -14,8 +14,19 @@
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
-Route::get('/post/{id}', 'HomeController@getPost')->name('post');
-Route::get('/post/{id}/category', 'HomeController@getPostByCategory')->name('post.category');
-Route::get('/post/{id}/user', 'HomeController@getPostByUser')->name('post.user');
+Route::group(['prefix' => 'post'], function(){
+  Route::get('{id}', 'HomeController@getPost')->name('post');
+  Route::get('{id}/category', 'HomeController@getPostByCategory')->name('post.category');
+  Route::get('{id}/user', 'HomeController@getPostByUser')->name('post.user');
+});
+
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
+  Route::get('/', function(){
+    return view('pages.admin.index');
+  })->name('admin');
+
+  Route::resource('category', 'CategoryController', ['names' => 'admin.category']);
+  // Route::resource('post', 'PostController', ['names' => 'admin.post']);
+});
 
 // Route::get('/home', 'HomeController@index')->name('home');
