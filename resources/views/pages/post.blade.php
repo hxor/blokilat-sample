@@ -16,7 +16,7 @@
         <hr>
 
         <!-- Date/Time -->
-        <p><span class="glyphicon glyphicon-time"></span> {{ $post->created_at->format('l jS \\of F Y h:i:s A') }}</p>
+        <p><span class="glyphicon glyphicon-time"></span> {{ $post->date->format('l jS \\of F Y h:i:s A') }}</p>
 
         <hr>
 
