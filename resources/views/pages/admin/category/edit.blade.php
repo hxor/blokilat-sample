@@ -18,7 +18,7 @@
               <!-- /.panel-heading -->
               <div class="panel-body">
 
-                  {!! Form::model($category, ['route' => ['category.update', $category->id], 'method' => 'PUT']) !!}
+                  {!! Form::model($category, ['route' => ['admin.category.update', $category->id], 'method' => 'PUT']) !!}
 
                       @include('pages.admin.category._form')
 

@@ -18,7 +18,7 @@
               <!-- /.panel-heading -->
               <div class="panel-body">
 
-                  {!! Form::open(['method' => 'POST', 'route' => 'category.store']) !!}
+                  {!! Form::open(['method' => 'POST', 'route' => 'admin.category.store']) !!}
                       @include('pages.admin.category._form')
                   {!! Form::close() !!}
               </div>

@@ -40,7 +40,7 @@ class CategoryController extends Controller
           'category' => 'required|unique:categories'
         ]);
         Category::create($request->all());
-        return redirect()->route('category.index');
+        return redirect()->route('admin.category.index');
     }
 
     /**
@@ -81,7 +81,7 @@ class CategoryController extends Controller
 
       Category::findOrFail($id)->update($request->all());
 
-      return redirect()->route('category.index');
+      return redirect()->route('admin.category.index');
     }
 
     /**
@@ -94,6 +94,6 @@ class CategoryController extends Controller
     {
        if(!Category::destroy($id)) return redirect()->back();
 
-       return redirect()->route('category.index');
+       return redirect()->route('admin.category.index');
     }
 }
