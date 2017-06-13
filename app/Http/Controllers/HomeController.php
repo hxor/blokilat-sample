@@ -26,7 +26,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $posts = Post::orderBy('date', 'desc')->paginate(3);
+        $posts = Post::where('status','1')->orderBy('date', 'desc')->paginate(3);
         return view('pages.blog', compact('posts'));
     }
 
@@ -34,7 +34,7 @@ class HomeController extends Controller
      * Get Post by Category
      */
     public function getPostByCategory($idcategory){
-        $posts = Category::findOrFail($idcategory)->posts()->orderBy('date', 'desc')->paginate(3);
+        $posts = Category::findOrFail($idcategory)->posts()->where('status','1')->orderBy('date', 'desc')->paginate(3);
         return view('pages.blog', compact('posts'));
     }
 
@@ -42,7 +42,7 @@ class HomeController extends Controller
      * Get Post by User
      */
      public function getPostByUser($iduser){
-        $posts = User::findOrFail($iduser)->posts()->orderBy('date', 'desc')->paginate(3);
+        $posts = User::findOrFail($iduser)->posts()->where('status','1')->orderBy('date', 'desc')->paginate(3);
         return view('pages.blog', compact('posts'));
      }
 

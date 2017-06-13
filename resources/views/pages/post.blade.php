@@ -21,7 +21,7 @@
         <hr>
 
         <!-- Preview Image -->
-        <img class="img-responsive" src='{{ asset("$post->image") }}' alt="">
+        <img class="img-responsive" src='{{ asset('image/featured_image/'.$post->image) }}' alt="">
 
         <hr>
 

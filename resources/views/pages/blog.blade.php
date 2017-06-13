@@ -23,7 +23,7 @@
             </p>
             <hr>
 
-            <img class="img-responsive" src='{{ asset("$post->image") }}' alt="">
+            <img class="img-responsive" src='{{ asset('image/featured_image/'.$post->image) }}' alt="">
             <hr>
 
             <p>{!! str_limit($post->body, 500) !!}</p>
