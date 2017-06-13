@@ -9,6 +9,7 @@ class Post extends Model
     protected $fillable = ['user_id', 'category_id', 'date', 'title', 'body', 'status', 'image'];
 
     protected $dates = [
+        'date',
         'created_at',
         'updated_at'
     ];
