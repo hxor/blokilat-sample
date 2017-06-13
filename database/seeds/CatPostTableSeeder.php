@@ -38,7 +38,7 @@ class CatPostTableSeeder extends Seeder
                        Aenean massa.
                        Cum sociis natoque penatibus et magnis dis parturient montes,
                        nascetur ridiculus mus.',
-            'image' => 'image/featured_image/900x300.png',
+            'image' => '900x300.png',
             'status' => 1,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime()

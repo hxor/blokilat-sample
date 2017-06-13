@@ -26,7 +26,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
   })->name('admin');
 
   Route::resource('category', 'CategoryController', ['names' => 'admin.category']);
-  // Route::resource('post', 'PostController', ['names' => 'admin.post']);
+  Route::resource('post', 'PostController', ['names' => 'admin.post']);
 });
 
 // Route::get('/home', 'HomeController@index')->name('home');

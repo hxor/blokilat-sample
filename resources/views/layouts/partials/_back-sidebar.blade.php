@@ -19,7 +19,7 @@
                 <a href="#"><i class="glyphicon glyphicon-pushpin"></i> Posts<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="#">Posts</a>
+                        <a href="{{ route('admin.post.index') }}">Posts</a>
                     </li>
                     <li>
                         <a href="{{ route('admin.category.index') }}">Categories</a>

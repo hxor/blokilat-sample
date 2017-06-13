@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Post;
 
 class PostController extends Controller
 {
@@ -13,7 +14,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $posts = Post::all();
+        return view('pages.admin.post.index', compact('posts'));
     }
 
     /**
@@ -23,7 +25,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.admin.post.create');
     }
 
     /**
@@ -34,7 +36,33 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+          'title' => 'required|string',
+          'body' => 'required',
+          'date' => 'required',
+        ]);
+
+        $data = [
+          'user_id' => $request->user_id,
+          'date' => $request->date,
+          'category_id' => $request->category_id,
+          'title' => $request->title,
+          'body' => $request->body,
+          'date' => $request->date,
+          'image' => '',
+          'status' => $request->status
+        ];
+
+        if ($request->hasFile('image')) {
+            $fileName = str_slug($request->title, '-'). '.' .$request->file('image')->getClientOriginalExtension();
+            $destinationPath = public_path() . DIRECTORY_SEPARATOR . 'image' . DIRECTORY_SEPARATOR . 'featured_image';
+            $request->file('image')->move($destinationPath, $fileName);
+            $data['image'] = $fileName;
+        }
+
+        Post::create($data);
+
+        return redirect()->route('admin.post.index');
     }
 
     /**
@@ -56,7 +84,8 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = Post::findOrFail($id);
+        return view('pages.admin.post.edit', compact('post'));
     }
 
     /**
@@ -68,7 +97,37 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+          'title' => 'required|string',
+          'body' => 'required',
+          'date' => 'required',
+        ]);
+
+        $data = [
+          'user_id' => $request->user_id,
+          'date' => $request->date,
+          'category_id' => $request->category_id,
+          'title' => $request->title,
+          'body' => $request->body,
+          'date' => $request->date,
+          'image' => '',
+          'status' => $request->status
+        ];
+
+        $post = Post::findOrFail($id);
+
+        if ($request->hasFile('image')) {
+            $fileName = str_slug($request->title, '-'). '.' .$request->file('image')->getClientOriginalExtension();
+            $destinationPath = public_path() . DIRECTORY_SEPARATOR . 'image' . DIRECTORY_SEPARATOR . 'featured_image';
+            $request->file('image')->move($destinationPath, $fileName);
+            $data['image'] = $fileName;
+        } else {
+            $data['image'] = $post->image;
+        }
+
+        $post->update($data);
+
+        return redirect()->route('admin.post.index');
     }
 
     /**
@@ -79,6 +138,15 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::findOrFail($id);
+
+        if ($post->image) {
+            $destinationPath = public_path() . DIRECTORY_SEPARATOR . 'image' . DIRECTORY_SEPARATOR . 'featured_image';
+            unlink($destinationPath.'/'.$post->image);
+        }
+
+        $post->delete();
+
+        return redirect()->route('admin.post.index');
     }
 }
